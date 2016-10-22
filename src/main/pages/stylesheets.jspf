@@ -1,0 +1,6 @@
+<!-- bower:css -->
+<!-- Don't put nothing here: it will be replaced by gulp. -->
+<!-- endbower -->
+
+<!-- Custom styles for this template -->
+<link href="${cp}/assets/application/css/frontend-tools-example.min.css" rel="stylesheet">

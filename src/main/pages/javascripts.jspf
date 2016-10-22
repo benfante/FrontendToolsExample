@@ -1,0 +1,5 @@
+<!-- bower:js -->
+<!-- Don't put nothing here: it will be replaced by gulp. -->
+<!-- endbower -->
+
+<script src="${cp}/assets/application/js/frontend-tools-example.min.js"></script>

@@ -1,0 +1,2 @@
+#!/bin/sh
+"$PWD/node/node" "node_modules/bower/bin/bower" "$@"

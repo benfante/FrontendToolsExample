@@ -1,0 +1,35 @@
+{
+  "name": "frontend-tools-example",
+  "version": "1.0.0",
+  "description": "Front-end development in Java webapps example.",
+  "main": "index.htm",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.11",
+    "gulp-concat": "^2.6.0",
+    "gulp-main-bower-files": "^1.5.3",
+    "gulp-uglify": "^1.5.4",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "phantomjs-prebuilt": "^2.1.7",
+    "wiredep": "^4.0.0"
+  },
+  "scripts": {
+    "prebuild": "npm install",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.benfante.com/Benfante/gestsms.git"
+  },
+  "author": "Lucio Benfante",
+  "license": "Apache-2.0"
+}
