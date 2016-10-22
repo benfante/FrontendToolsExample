@@ -167,6 +167,52 @@
 
                 </executions>
             </plugin>
+            
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.9.0</version>
+                <configuration>
+                    <header>${basedir}/LICENSE_HEADER</header>
+                    <strictCheck>true</strictCheck>
+                    <aggregate>false</aggregate>
+                    <excludes>
+                        <exclude>target/**</exclude>
+                        <exclude>m2-target/**</exclude>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/logback*.xml</exclude>
+                        <exclude>LICENSE_HEADER</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>README.md</exclude>
+                        <exclude>nb-configuration.xml</exclude>
+                        <exclude>nbactions.xml</exclude>
+                        <exclude>profiles.xml</exclude>
+                        <exclude>catalog.xml</exclude>
+                        <exclude>.gitignore</exclude>
+                        <exclude>.idea/**</exclude>
+                        <exclude>node_modules/**</exclude>
+                        <exclude>node/**</exclude>
+                        <exclude>bower_components/**</exclude>
+                        <exclude>src/main/webapp/assets/**</exclude>
+                    </excludes>
+                    <properties>
+                        <name>${project.name}</name>
+                        <year>2016</year>
+                        <holder>Lucio Benfante</holder>
+                        <contact>lucio.benfante@gmail.com</contact>
+                    </properties>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
         </plugins>
     </build>
     <profiles>
