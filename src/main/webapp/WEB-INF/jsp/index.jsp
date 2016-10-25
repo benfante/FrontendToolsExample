@@ -30,7 +30,7 @@
     <title>Off Canvas Template for Bootstrap</title>
 
     <%@ include file="/WEB-INF/jsp/stylesheets.jspf" %>
-    
+
   </head>
 
   <body>
@@ -50,7 +50,7 @@
       <div class="row row-offcanvas row-offcanvas-right">
 
         <div class="col-xs-12 col-sm-9">
-          <p class="pull-xs-right hidden-sm-up">
+          <p class="float-xs-right hidden-sm-up">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
