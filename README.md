@@ -23,6 +23,12 @@ Then you'll can run it with:
 
 Point your browser to `http://localhost:8080/FrontendToolsExample` for seeing the result.
 
+If you need to totally clean the project (for removing all the externally downloaded parts and generated sources...so clean as just after the checkout), type:
+
+```
+./mvnw clean -Pclean-all
+```
+
 ##References
 
 * The sample page (html, css and js) is taken from the [Offcanvas example](http://v4-alpha.getbootstrap.com/examples/offcanvas/) of [Bootstrap 4 - alpha 4](http://v4-alpha.getbootstrap.com).
