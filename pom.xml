@@ -71,6 +71,11 @@
                 <version>3.0.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>target/generated-sources/main/webapp</directory>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             <plugin>
@@ -80,6 +85,9 @@
                 <configuration>
                     <webApp>
                         <contextPath>/FrontendToolsExample</contextPath>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <resourcesAsCSV>target/generated-sources/main/webapp,src/main/webapp</resourcesAsCSV>
+                        </baseResource>
                     </webApp>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                 </configuration>
@@ -270,16 +278,6 @@
                                 </fileset>
                                 <fileset>
                                     <directory>node_modules</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>src/main/webapp/assets</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>src/main/webapp/WEB-INF/jsp</directory>
-                                    <includes>
-                                        <include>/javascripts.jspf</include>
-                                        <include>/stylesheets.jspf</include>
-                                    </includes>
                                 </fileset>
                             </filesets>
                         </configuration>

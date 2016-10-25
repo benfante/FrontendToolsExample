@@ -4,6 +4,3 @@
 /bower_components/
 /node/
 /node_modules/
-/src/main/webapp/WEB-INF/jsp/javascripts.jspf
-/src/main/webapp/WEB-INF/jsp/stylesheets.jspf
-/src/main/webapp/assets/

@@ -19,12 +19,6 @@ var cleanCSS = require('gulp-clean-css');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var wiredep = require('wiredep').stream;
-var mainBowerFiles = require('gulp-main-bower-files');
-
-gulp.task("copy_bower_dependencies", function copyBowerDependencies() {
-    gulp.src("./bower_components/**/*")
-            .pipe(gulp.dest("src/main/webapp/assets/bower_components/"));
-});
 
 var bowerOverrides = {
     'bootstrap': {
@@ -37,10 +31,9 @@ var bowerOverrides = {
     'tether': {main: ['dist/js/tether.js', 'dist/css/tether.css']}
 };
 
-gulp.task('copy_main_dependencies', function copyMainDependencies() {
-    return gulp.src('./bower.json')
-            .pipe(mainBowerFiles(['**/*.js', '**/*.css'], {overrides: bowerOverrides}))
-            .pipe(gulp.dest('./src/main/webapp/assets/bower_components/'));
+gulp.task("copy_bower_dependencies", function copyBowerDependencies() {
+    gulp.src("./bower_components/**/*")
+            .pipe(gulp.dest("target/generated-sources/main/webapp/assets/bower_components/"));
 });
 
 gulp.task('css', function () {
@@ -48,14 +41,14 @@ gulp.task('css', function () {
             .pipe(cleanCSS())
             .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
             .pipe(concat('frontend-tools-example.min.css'))
-            .pipe(gulp.dest('src/main/webapp/assets/application/css'));
+            .pipe(gulp.dest('target/generated-sources/main/webapp/assets/application/css'));
 });
 
 gulp.task('js', function () {
     gulp.src('src/main/javascript/**/*.js')
             .pipe(concat('frontend-tools-example.min.js'))
             .pipe(uglify())
-            .pipe(gulp.dest('src/main/webapp/assets/application/js/'));
+            .pipe(gulp.dest('target/generated-sources/main/webapp/assets/application/js/'));
 });
 
 gulp.task('deps', function () {
@@ -72,7 +65,7 @@ gulp.task('deps', function () {
                 overrides: bowerOverrides,
                 ignorePath: '../../../bower_components/'
             }))
-            .pipe(gulp.dest('src/main/webapp/WEB-INF/jsp/'));
+            .pipe(gulp.dest('target/generated-sources/main/webapp/WEB-INF/jsp/'));
 });
 
 gulp.task('default', ['css', 'js', 'copy_bower_dependencies', 'deps']);
