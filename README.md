@@ -117,7 +117,7 @@ There is no need to install NodeJS, NPM, Gulp, etc. in your computer, as they ar
 already installed automatically into the project. For using this local installation,
 the project provides some helper scripts in the `helper-scripts` directory.
 
-Open a termina session, and go to the main directory of the project for launching the scripts.
+Open a terminal session, and go to the main directory of the project for launching the scripts.
 
 Following some examples:
 
@@ -146,6 +146,30 @@ For example, if you need [Select2](https://select2.github.io/):
 ```
 ./helper-scripts/gulp js
 ```
+
+### Front-end component management
+
+The project uses Bootstrap and JQuery. The front-end project components are managed through Bower.
+
+Look at the bower configuration file `bower.json`:
+
+```
+{
+  "name": "frontend-tools-example",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "bootstrap": "v4.0.0-alpha.5",
+    "tether": "^1.3.3"
+  },
+  "private": true
+}
+```
+
+All the dependencies are downloaded in the `bower_components` directory.
+
+If you need other components, add them to the `bower.json` (or, better, using 
+the bower command, as previsously seen).
 
 ## References
 
