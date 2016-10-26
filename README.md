@@ -238,6 +238,80 @@ definition in the `pom.xml`:
 </plugin>
 ```
 
+### Wiring CSS and Javascript in the pages
+
+Automatically downloading the frontend componens by bower is surely usefull, but You still
+have to put in the HTML pages the references to CSS and Javascripts. Combining Bower and Gulp
+You can automate even this task. Look at the `deps` task in the `gulpfile.js`:
+
+```
+gulp.task('deps', function () {
+    return gulp.src(['src/main/pages/javascripts.jspf', 'src/main/pages/stylesheets.jspf'])
+        .pipe(wiredep({
+            fileTypes: {
+                html: {
+                    replace: {
+                        js: '<script src="${cp}/assets/bower_components/{{filePath}}"></script>',
+                        css: '<link rel="stylesheet" href="${cp}/assets/bower_components/{{filePath}}" />'
+                    }
+                }
+            },
+            overrides: bowerOverrides,
+            ignorePath: '../../../bower_components/'
+        }))
+        .pipe(gulp.dest('target/generated-sources/main/webapp/WEB-INF/jsp/'));
+});
+```
+
+It uses the [wiredep](https://github.com/taptapship/wiredep) NoteJS module for extracting from the Bower
+dependencies the references to the main files of each component, and put them in the correct place.
+
+For example, looking at the `src/main/pages/javascripts.jspf` file:
+
+```
+<!-- bower:js -->
+<!-- Don't put nothing here: it will be replaced by gulp. -->
+<!-- endbower -->
+```
+
+The content between the comments will be
+replaced by the corresponding list of "replace" strings, filled with the js files declared as
+"main" by the bower components. The same for the css in the `stylesheets.jspf`.
+
+The result for `javascripts.jspf` will be:
+
+```
+<!-- bower:js -->
+<script src="${cp}/assets/bower_components/jquery/dist/jquery.js"></script>
+<script src="${cp}/assets/bower_components/tether/dist/js/tether.js"></script>
+<script src="${cp}/assets/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!-- endbower -->
+```
+
+Some configuration is needed if the bower component doesn't declare correctly its main
+files, or if the dependencies of some components must be declared for assuring the
+correct order of the generated list. In these cases you can override specific parts
+of the configuration of the bower components. In our case:
+
+```
+var bowerOverrides = {
+    'bootstrap': {
+        main: ['dist/js/bootstrap.js', 'dist/css/bootstrap.css'],
+        dependencies: {
+            "jquery": "1.9.1 - 3",
+            "tether": ">=1.3.3"
+        }
+    },
+    'tether': {main: ['dist/js/tether.js', 'dist/css/tether.css']}
+};
+```
+
+Here we changed the main files of the bootstrap and tether modules, and added
+tether as dependency of bootstrap.
+
+The resulting `javascripts.jspf` and `stylesheets.js` files are stored in the 
+`target/generated-sources/main/webapp/WEB-INF/jsp/` directory, and then packaged
+into the war by Maven.
 
 ## References
 
