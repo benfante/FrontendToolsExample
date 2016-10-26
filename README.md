@@ -169,7 +169,75 @@ Look at the bower configuration file `bower.json`:
 All the dependencies are downloaded in the `bower_components` directory.
 
 If you need other components, add them to the `bower.json` (or, better, using 
-the bower command, as previsously seen).
+the bower command, as previously seen).
+
+### Packaging CSS and Javascript
+
+The CSS and the Javascript is manipulated and moved in the webapp structure by Gulp.
+
+The final location will be the `assets` path, so they will be requested at the `http:/your-server/your-context-path/assets/and-so-on...` URLs.
+
+In fact Gulp moves the components in the `target/generated-sources/main/webapp` directory. Look at the `gulpfile.js`.
+
+The `copy_bower_dependencies` task copies the bower components from the `bower_components`
+directory, to the `target/generated-sources/main/webapp/assets/bower_components` directory:
+
+```
+gulp.task("copy_bower_dependencies", function copyBowerDependencies() {
+    gulp.src("./bower_components/**/*")
+            .pipe(gulp.dest("target/generated-sources/main/webapp/assets/bower_components/"));
+});
+```
+
+The `css` task gets all the css files from the `src/main/styles` directory (and subdirectories),
+cleans the css, autoprefix and concatenate them to the
+`target/generated-sources/main/webapp/assets/application/css/frontend-tools-example.min.css` file:
+
+```
+gulp.task('css', function () {
+    gulp.src('src/main/styles/**/*.css')
+            .pipe(cleanCSS())
+            .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
+            .pipe(concat('frontend-tools-example.min.css'))
+            .pipe(gulp.dest('target/generated-sources/main/webapp/assets/application/css'));
+});
+```
+
+The `js` task gets all the Javascripts files from the `src/main/javascript` directory (and subdirectories),
+cleans and concatenates them to the
+`target/generated-sources/main/webapp/assets/application/js/frontend-tools-example.min.js` file:
+
+```
+gulp.task('js', function () {
+    gulp.src('src/main/javascript/**/*.js')
+            .pipe(concat('frontend-tools-example.min.js'))
+            .pipe(uglify())
+            .pipe(gulp.dest('target/generated-sources/main/webapp/assets/application/js/'));
+});
+```
+
+Putting these files in the `target` subtree (instead that, for example, in the `src` subtree)
+is a strong indication that such files should not be added to your version control system.
+
+Then Maven will package also these files in the resulting war, thanks to the following web resource
+definition in the `pom.xml`:
+
+```
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>3.0.0</version>
+    <configuration>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <webResources>
+            <resource>
+                <directory>target/generated-sources/main/webapp</directory>
+            </resource>
+        </webResources>
+    </configuration>
+</plugin>
+```
+
 
 ## References
 
