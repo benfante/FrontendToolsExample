@@ -9,7 +9,7 @@ A sample project using frontend tools (Nodejs, Bower, Gulp, Grunt, etc.) in a Ja
 
 This project builds with [Maven](http://apache.maven.org). You do not need to install Maven to build the project, as Maven can install itself through the [Maven wrapper plugin](https://github.com/rimerosolutions/maven-wrapper). To build, run this in the checkout main directory:
 
-```
+```sh
 ./mvnw clean install
 ```
 
@@ -17,7 +17,7 @@ That will build the entire project, download and install all the needed front-en
 
 Then you'll can run it with:
 
-```
+```sh
 ./mvnw jetty:run
 ```
 
@@ -25,7 +25,7 @@ Point your browser to `http://localhost:8080/FrontendToolsExample` for seeing th
 
 If you need to totally clean the project (for removing all the externally downloaded parts and generated sources...so clean as just after the checkout), type:
 
-```
+```sh
 ./mvnw clean -Pclean-all
 ```
 
@@ -37,7 +37,7 @@ The [frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin) w
 
 Look at the `pom.xml` for the plugin configuration:
 
-```
+```xml
 <plugin>
     <groupId>com.github.eirslett</groupId>
     <artifactId>frontend-maven-plugin</artifactId>
@@ -68,7 +68,7 @@ NodeJS will be installed in the `node` directory. The NodeJS modules (Bower, Gru
 will be installed in the `node_modules` directory through NPM. Look at the `package.json` file
 for the NPM configuration:
 
-```
+```json
 {
   "name": "frontend-tools-example",
   "version": "1.0.0",
@@ -125,7 +125,7 @@ Following some examples:
 
 For example, if you need Webpack:
 
-```
+```sh
 ./helper-scripts/npm install webpack --save-dev
 ```
 
@@ -135,7 +135,7 @@ For example, if you need Webpack:
 
 For example, if you need [Select2](https://select2.github.io/):
 
-```
+```sh
 ./helper-scripts/bower install select2 --save
 ```
 
@@ -143,7 +143,7 @@ For example, if you need [Select2](https://select2.github.io/):
 
 #### Re-build your Javascript
 
-```
+```sh
 ./helper-scripts/gulp js
 ```
 
@@ -153,7 +153,7 @@ The project uses Bootstrap and JQuery. The front-end project components are mana
 
 Look at the bower configuration file `bower.json`:
 
-```
+```json
 {
   "name": "frontend-tools-example",
   "version": "1.0.0",
@@ -182,7 +182,7 @@ In fact Gulp moves the components in the `target/generated-sources/main/webapp` 
 The `copy_bower_dependencies` task copies the bower components from the `bower_components`
 directory, to the `target/generated-sources/main/webapp/assets/bower_components` directory:
 
-```
+```javascript
 gulp.task("copy_bower_dependencies", function copyBowerDependencies() {
     gulp.src("./bower_components/**/*")
             .pipe(gulp.dest("target/generated-sources/main/webapp/assets/bower_components/"));
@@ -193,7 +193,7 @@ The `css` task gets all the css files from the `src/main/styles` directory (and 
 cleans the css, autoprefix and concatenate them to the
 `target/generated-sources/main/webapp/assets/application/css/frontend-tools-example.min.css` file:
 
-```
+```javascript
 gulp.task('css', function () {
     gulp.src('src/main/styles/**/*.css')
             .pipe(cleanCSS())
@@ -207,7 +207,7 @@ The `js` task gets all the Javascripts files from the `src/main/javascript` dire
 cleans and concatenates them to the
 `target/generated-sources/main/webapp/assets/application/js/frontend-tools-example.min.js` file:
 
-```
+```javascript
 gulp.task('js', function () {
     gulp.src('src/main/javascript/**/*.js')
             .pipe(concat('frontend-tools-example.min.js'))
@@ -222,7 +222,7 @@ is a strong indication that such files should not be added to your version contr
 Then Maven will package also these files in the resulting war, thanks to the following web resource
 definition in the `pom.xml`:
 
-```
+```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-war-plugin</artifactId>
@@ -244,7 +244,7 @@ Automatically downloading the frontend componens by bower is surely usefull, but
 have to put in the HTML pages the references to CSS and Javascripts. Combining Bower and Gulp
 You can automate even this task. Look at the `deps` task in the `gulpfile.js`:
 
-```
+```javascript
 gulp.task('deps', function () {
     return gulp.src(['src/main/pages/javascripts.jspf', 'src/main/pages/stylesheets.jspf'])
         .pipe(wiredep({
@@ -263,12 +263,12 @@ gulp.task('deps', function () {
 });
 ```
 
-It uses the [wiredep](https://github.com/taptapship/wiredep) NoteJS module for extracting from the Bower
+It uses the [wiredep](https://github.com/taptapship/wiredep) NodeJS module for extracting from the Bower
 dependencies the references to the main files of each component, and put them in the correct place.
 
 For example, looking at the `src/main/pages/javascripts.jspf` file:
 
-```
+```html
 <!-- bower:js -->
 <!-- Don't put nothing here: it will be replaced by gulp. -->
 <!-- endbower -->
@@ -280,7 +280,7 @@ replaced by the corresponding list of "replace" strings, filled with the js file
 
 The result for `javascripts.jspf` will be:
 
-```
+```jsp
 <!-- bower:js -->
 <script src="${cp}/assets/bower_components/jquery/dist/jquery.js"></script>
 <script src="${cp}/assets/bower_components/tether/dist/js/tether.js"></script>
@@ -293,7 +293,7 @@ files, or if the dependencies of some components must be declared for assuring t
 correct order of the generated list. In these cases you can override specific parts
 of the configuration of the bower components. In our case:
 
-```
+```javascript
 var bowerOverrides = {
     'bootstrap': {
         main: ['dist/js/bootstrap.js', 'dist/css/bootstrap.css'],
