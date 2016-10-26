@@ -125,7 +125,7 @@ Following some examples:
 
 For example, if you need Webpack:
 
-```sh
+```shell
 ./helper-scripts/npm install webpack --save-dev
 ```
 
@@ -309,7 +309,7 @@ var bowerOverrides = {
 Here we changed the main files of the bootstrap and tether modules, and added
 tether as dependency of bootstrap.
 
-The resulting `javascripts.jspf` and `stylesheets.js` files are stored in the 
+The resulting `javascripts.jspf` and `stylesheets.jspf` files are stored in the 
 `target/generated-sources/main/webapp/WEB-INF/jsp/` directory, and then packaged
 into the war by Maven.
 
