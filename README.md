@@ -1,6 +1,7 @@
 # FrontendToolsExample
 
 [![Build Status](https://travis-ci.org/benfante/FrontendToolsExample.svg?branch=master)](https://travis-ci.org/benfante/FrontendToolsExample)
+[![Build status](https://ci.appveyor.com/api/projects/status/h6ix2nv6esfckt0s?svg=true)](https://ci.appveyor.com/project/benfante/frontendtoolsexample)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/benfante/FrontendToolsExample/master/LICENSE)
 
 A sample project using frontend tools (Nodejs, Bower, Gulp, Grunt, etc.) in a Java webapp.
