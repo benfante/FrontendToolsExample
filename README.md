@@ -8,7 +8,7 @@ A sample project using frontend tools (Nodejs, Bower, Gulp, Grunt, etc.) in a Ja
 
 ## Building
 
-This project builds with [Maven](http://apache.maven.org). You do not need to install Maven to build the project, as Maven can install itself through the [Maven wrapper plugin](https://github.com/rimerosolutions/maven-wrapper). To build, run this in the checkout main directory:
+This project builds with [Maven 3](http://apache.maven.org). You do not need to install Maven to build the project, as Maven can install itself through the [Maven wrapper plugin](https://github.com/rimerosolutions/maven-wrapper). To build, run this in the checkout main directory:
 
 ```sh
 ./mvnw clean install
